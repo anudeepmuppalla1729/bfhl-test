@@ -26,21 +26,30 @@ app.post('/bfhl', (req, res) => {
                 continue;
             }
             let val = item.trim();
+            
+            // valid node format checking via regex
             if (!/^[A-Z]->[A-Z]$/.test(val)) {
                 invalidEntries.push(item);
                 continue;
             }
+            
             let a = val[0];
             let b = val[3];
+            
+            // here we are handling self-loops
             if (a === b) {
                 invalidEntries.push(item);
                 continue;
             }
+            
+            // we are handling and tracking duplicates 
             if (seenEdges.has(val)) {
                 dupEdges.add(val);
                 continue;
             }
             seenEdges.add(val);
+            
+            // first parent wins rule for multi parent cases
             if (!parentOf[b]) {
                 parentOf[b] = a;
                 if (!childrenOf[a]) childrenOf[a] = [];
@@ -52,6 +61,8 @@ app.post('/bfhl', (req, res) => {
 
         let remainingNodes = new Set(nodes);
         let roots = [];
+        
+        // here we are finding roots i.e nodes with no parents
         for (let n of remainingNodes) {
             if (!parentOf[n]) {
                 roots.push(n);
@@ -61,6 +72,7 @@ app.post('/bfhl', (req, res) => {
         let trees = [];
         let cycles = [];
 
+        // recursively building tree objects
         function buildTree(n, visited) {
             visited.push(n);
             let obj = {};
@@ -95,6 +107,7 @@ app.post('/bfhl', (req, res) => {
             }
         }
 
+        // making sure no cycles or extra nodes are left
         while (remainingNodes.size > 0) {
             let start = Array.from(remainingNodes)[0];
             let comp = new Set();
@@ -117,6 +130,7 @@ app.post('/bfhl', (req, res) => {
             cycles.push({ root: minNode, tree: {}, has_cycle: true });
         }
 
+        // finding largest tree for summary
         let maxDepth = 0;
         let bigRoot = "";
         for (let t of trees) {
@@ -135,9 +149,9 @@ app.post('/bfhl', (req, res) => {
         for(let c of cycles) hierarchies.push(c);
 
         res.json({
-            user_id: "muppalla_anudeep_chowdary_29062006",
-            email_id: "anudeep_muppalla@srmap.edu.in",
-            college_roll_number: "AP23110011278",
+            user_id: "anudeep_muppalla_17091999",
+            email_id: "am1729@srmist.edu.in",
+            college_roll_number: "RA2111003011729",
             hierarchies: hierarchies,
             invalid_entries: invalidEntries,
             duplicate_edges: Array.from(dupEdges),
