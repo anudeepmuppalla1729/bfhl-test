@@ -19,8 +19,19 @@ I tried to keep the logic simple and followed these steps:
     -   I pick the alphabetically smallest letter to be the "root" for these cyclic groups.
 5.  **Summary Logic**: I just count the trees and cycles and find which root had the biggest depth.
 
-
 ## Tech Stack
 -   **Backend**: Node.js, Express, CORS
 -   **Frontend**: React (Vite), Vanilla CSS
 -   **Deployment**: Dockerized for easy hosting.
+
+## Complexity Analysis
+
+I tried to keep it fast so it handles 50 nodes easily:
+
+-   **Time Complexity**: **O(N + E)**
+    -   We loop through the input list once to clean it and build the maps (O(N)).
+    -   Then we visit each node and edge once to build the trees and find cycles (O(V+E)).
+    -   Since the inputs are small (up to 50 nodes), it's super fast!
+-   **Space Complexity**: **O(V + E)**
+    -   We store the nodes and edges in maps and sets so we can look them up quickly.
+    -   We also store the final tree objects to send them back in the JSON.
