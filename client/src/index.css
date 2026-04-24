@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root {
+  --primary: #d97757; /* Claude-inspired orange/peach */
+  --primary-hover: #c66042;
+  --bg-color: #f3f1eb; /* Claude beige/off-white */
+  --card-bg: #ffffff; /* Clean white for cards */
+  --text-color: #2b2a27; /* Very dark grey for high contrast readability */
+  --text-muted: #6c6a65;
+  --error: #cc3f3f;
+  --success: #3c824c;
+  --border: rgba(0, 0, 0, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#root {
+  width: 100%;
+}
