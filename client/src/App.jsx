@@ -29,12 +29,12 @@ function App() {
             .filter(s => s.length > 0);
       }
       
-      const res = await fetch("http://localhost:3000/bfhl", {
+      const res = await fetch("https://bfhl-test-one.vercel.app/bfhl", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ data: parsedData })
+        body: JSON.stringify({ data: parsedData }),
       });
 
       if (!res.ok) {
