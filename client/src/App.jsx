@@ -29,13 +29,16 @@ function App() {
             .filter(s => s.length > 0);
       }
       
-      const res = await fetch("https://bfhl-test-one.vercel.app/bfhl", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const res = await fetch(
+        "https://anudeep-muppalla-bfhl-test-server.vercel.app/bfhl",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data: parsedData }),
         },
-        body: JSON.stringify({ data: parsedData }),
-      });
+      );
 
       if (!res.ok) {
         throw new Error("API Call failed with status " + res.status);
